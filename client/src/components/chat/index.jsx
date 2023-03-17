@@ -11,11 +11,11 @@ import AIChat from "@/components/forms/AIChat";
 import AICode from "@/components/forms/AICode";
 import AIAssist from "@/components/forms/AIAssist";
 
-const Chat = () => {
+const Chat = ({ user, secret }) => {
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
-    "testuser",
-    "1234"
+    user,
+    secret
   );
 
   return (
@@ -37,7 +37,6 @@ const Chat = () => {
           if (chatProps.chat?.title.includes("AIAssist")) {
             return <AIAssist props={props} activeChat={chatProps.chat} />;
           }
-
 
           return (
             <StandardMessageForm props={props} activeChat={chatProps.chat} />

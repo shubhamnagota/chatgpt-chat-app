@@ -8,6 +8,7 @@ import { Configuration, OpenAIApi } from "openai";
 dotenv.config();
 
 import openAiRoutes from "./routes/openai.router.js";
+import authRoutes from "./routes/auth.router.js";
 
 const PORT = process.env.PORT || 9000;
 const app = express();
@@ -19,6 +20,7 @@ app.use(morgan("common"));
 app.use(cors());
 
 app.use("/openai", openAiRoutes);
+app.use("/auth", authRoutes);
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_API_KEY,
