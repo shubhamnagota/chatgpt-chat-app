@@ -14,10 +14,21 @@ const PORT = process.env.PORT || 9000;
 const app = express();
 
 app.use(express.json());
-app.use(helmet());
-// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+  }),
+);
 app.use(morgan("common"));
-app.use(cors("*"));
+app.use(
+  cors({
+    origin: "*",
+  }),
+);
+
+app.get("/health", (req, res) => {
+  return res.status(200).send("Server is healthy... 😄");
+});
 
 app.use("/openai", openAiRoutes);
 app.use("/auth", authRoutes);
